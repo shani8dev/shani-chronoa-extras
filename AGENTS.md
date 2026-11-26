@@ -19,3 +19,11 @@ rules (verify by execution, the shani-testbed harness, consent keys) apply here.
   opens windows on the person's display.
 - Never `git stash`. Commit messages end with the co-author line of whoever
   made the change.
+
+## Shared architecture (all repos)
+
+One implementation per capability, logic out of UI code, every UI and the
+assistant built on the same services: the plan is `../shani-shell/docs/SHARED-ARCHITECTURE.md`, and this
+repo's part is `docs/SHARED-PLAN.md`. Read both before changing a backend, a
+CLI, a device engine or a settings page, and do as much of this repo's part
+as your task allows.
