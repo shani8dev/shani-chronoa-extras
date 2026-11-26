@@ -30,7 +30,8 @@ import sys
 
 import pytest
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[3] / "usr/lib/shani-chronoa"))
+from shani_sysadmin.bootstrap import APP_ROOT, CHRONOA_ROOT  # noqa: E402
+sys.path.insert(0, str(CHRONOA_ROOT / "usr/lib/shani-chronoa"))
 
 from shani_sysadmin.skills import discover_hosts as dh  # noqa: E402
 

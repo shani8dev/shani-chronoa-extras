@@ -17,9 +17,13 @@ sys.dont_write_bytecode = True
 os.environ["PYTHONDONTWRITEBYTECODE"] = "1"
 
 APP_ROOT = Path(__file__).resolve().parents[1]
-REPO_ROOT = APP_ROOT.parent.parent
 sys.path.insert(0, str(APP_ROOT))
-sys.path.insert(0, str(REPO_ROOT / "usr/lib/shani-chronoa"))
+from shani_sysadmin.bootstrap import CHRONOA_ROOT  # noqa: E402 - puts Chronoa's library on sys.path
+
+if CHRONOA_ROOT is None:
+    raise SystemExit("the tests need a Chronoa checkout: clone shani-chronoa beside this repo, "
+                     "or set SHANI_CHRONOA_ROOT")
+REPO_ROOT = CHRONOA_ROOT
 
 # Share the canonical suite's fixtures: the moved tests still use
 # `gsettings_env`, `stubbed_app`, and the autouse environment isolation.

@@ -33,7 +33,8 @@ import sys
 
 import pytest
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[3] / "usr/lib/shani-chronoa"))
+from shani_sysadmin.bootstrap import APP_ROOT, CHRONOA_ROOT  # noqa: E402
+sys.path.insert(0, str(CHRONOA_ROOT / "usr/lib/shani-chronoa"))
 
 from shani_chronoa import tools  # noqa: E402
 from shani_sysadmin.skills import scheduled_tasks as st  # noqa: E402

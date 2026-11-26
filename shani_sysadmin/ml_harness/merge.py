@@ -203,11 +203,8 @@ def _scratch(prefix: str) -> Path:
     """
     root = os.environ.get("SHANI_MERGE_SCRATCH", "").strip()
     if not root:
-        from pathlib import Path as _P
-        try:
-            root = str(_P(__file__).resolve().parents[4] / "cache" / "merge-scratch")
-        except (IndexError, OSError):
-            root = tempfile.gettempdir()
+        from shani_sysadmin.bootstrap import CACHE_DIR
+        root = str(CACHE_DIR / "merge-scratch")
     base = Path(root)
     base.mkdir(parents=True, exist_ok=True)
     return Path(tempfile.mkdtemp(prefix=prefix, dir=str(base)))

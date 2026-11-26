@@ -33,7 +33,10 @@ def test_it_is_gated_off_by_default(monkeypatch):
         def get_bool(self, key, default=False):
             return False
     monkeypatch.setattr(sd, "ChronoaConfig", Off)
-    assert "document-search-enabled" in sd._run({"query": "lease"})
+    # a refusal names the Settings row a person can find, not the schema key
+    said = sd._run({"query": "lease"})
+    assert said.startswith("Refusing")
+    assert "Let Chronoa search inside your files" in said
 
 
 def test_localsearch_results_are_parsed_through_colour_codes(bindir):

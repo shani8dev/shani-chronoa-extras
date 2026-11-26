@@ -27,7 +27,8 @@ import sys
 
 import pytest
 
-_REPO = pathlib.Path(__file__).resolve().parents[3]  # app/tests -> app -> apps -> repo
+from shani_sysadmin.bootstrap import APP_ROOT, CHRONOA_ROOT  # noqa: E402
+_REPO = CHRONOA_ROOT
 _APP = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(_REPO / "usr" / "lib" / "shani-chronoa"))
 

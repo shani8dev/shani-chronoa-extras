@@ -17,7 +17,8 @@ from pathlib import Path
 
 import pytest
 
-_REPO = pathlib.Path(__file__).resolve().parents[3]
+from shani_sysadmin.bootstrap import APP_ROOT, CHRONOA_ROOT  # noqa: E402
+_REPO = CHRONOA_ROOT
 sys.path.insert(0, str(_REPO / "usr" / "lib" / "shani-chronoa"))
 
 from shani_sysadmin.skills import stale_files as SF  # noqa: E402

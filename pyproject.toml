@@ -3,12 +3,13 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "shani-sysadmin"
+name = "shani-chronoa-extras"
 version = "0.1.0"
-description = "Sysadmin and driver tooling moved out of the Chronoa assistant"
+description = "Specialist system, network, driver, container and model tools for the Chronoa assistant"
 readme = "README.md"
 requires-python = ">=3.11"
-license = { text = "MIT" }
+# moved out of shani-chronoa, so under its licence
+license = { text = "GPL-3.0-only" }
 # The moved skills use only the standard library plus modules already shipped
 # by Chronoa (files, config, sysfs, sense_reading, egress, netprovision). The
 # ML harnesses additionally use numpy, which Chronoa's model work already
@@ -19,6 +20,8 @@ dependencies = []
 ml = ["numpy"]
 
 [project.scripts]
+shani-chronoa-extras = "shani_sysadmin.__main__:main"
+# the name Chronoa's messages and older notes use
 shani-sysadmin = "shani_sysadmin.__main__:main"
 
 [tool.setuptools]

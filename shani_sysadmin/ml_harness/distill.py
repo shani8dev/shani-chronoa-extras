@@ -281,10 +281,12 @@ def resolve(teacher_id: Optional[str] = None, config=None) -> Teacher:
 
 def load_cases(path: Optional[Path] = None) -> List[RoutingCase]:
     """The supervised routing set: a request and the skills that answer it."""
-    # .../shani-chronoa/usr/lib/shani-chronoa/distill.py -> parents[4] is the
-    # package root, where tools/ lives. parents[3] is usr/, which does not.
-    path = path or (Path(__file__).resolve().parents[4]
-                     / "tools" / "eval_cases.json")
+    # the routing cases live in Chronoa's checkout (tools/eval_cases.json)
+    from shani_sysadmin.bootstrap import CHRONOA_ROOT
+    if path is None and CHRONOA_ROOT is None:
+        logger.debug("distill: no Chronoa checkout, so no routing cases")
+        return []
+    path = path or (CHRONOA_ROOT / "tools" / "eval_cases.json")
     try:
         raw = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError) as exc:

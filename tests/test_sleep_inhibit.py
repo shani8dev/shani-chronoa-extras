@@ -29,7 +29,8 @@ from pathlib import Path
 
 import pytest
 
-_REPO = Path(__file__).resolve().parents[3]
+from shani_sysadmin.bootstrap import APP_ROOT, CHRONOA_ROOT  # noqa: E402
+_REPO = CHRONOA_ROOT
 sys.path.insert(0, str(_REPO / "usr" / "lib" / "shani-chronoa"))
 
 from shani_chronoa.capabilities import MUTATING_TOOLS, tool_annotations  # noqa: E402

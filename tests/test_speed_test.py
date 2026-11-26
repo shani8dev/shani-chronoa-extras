@@ -11,7 +11,8 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-_REPO = Path(__file__).resolve().parents[3]
+from shani_sysadmin.bootstrap import APP_ROOT, CHRONOA_ROOT  # noqa: E402
+_REPO = CHRONOA_ROOT
 sys.path.insert(0, str(_REPO / "usr/lib/shani-chronoa"))
 
 from shani_sysadmin.skills import speed_test as st  # noqa: E402

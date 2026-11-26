@@ -25,6 +25,7 @@ import subprocess
 import pytest
 
 from shani_sysadmin.skills import autostart_entries as ae
+from shani_sysadmin.bootstrap import APP_ROOT, CHRONOA_ROOT  # noqa: E402
 
 # --- captured verbatim from /etc/xdg/autostart on @blue ---------------------
 ATSPI = """\
@@ -405,7 +406,7 @@ class TestItIsReachable:
         assert ae._autostart_dirs()[0] == str(
             pathlib.Path(files.config_home()) / "autostart")
 
-        app = (pathlib.Path(__file__).resolve().parents[3]
+        app = (CHRONOA_ROOT
                / "usr/lib/shani-chronoa/shani_chronoa/app/desktop_integration.py")
         src = app.read_text(encoding="utf-8")
         assert '_AUTOSTART_DIR = str(files.config_home() / "autostart")' in src, (

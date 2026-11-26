@@ -1,24 +1,45 @@
-# shani-sysadmin
+# shani-chronoa-extras
 
-The sysadmin, driver, container/VM and packet-level tooling that used to be
-registered as Chronoa skills. It is now a standalone CLI, so it is no longer
-offered to the model on every turn and it is no longer part of Chronoa's
-`tools` whitelist or MCP server.
+Specialist tools for [Shani Chronoa](https://github.com/shani8dev/shani-chronoa):
+services and logs, deep network and forensics reads, packet capture, binary
+analysis, kernel and driver development, containers and VMs, lab networking,
+and the model-training harnesses. They used to be Chronoa skills; they live
+here so the assistant is not offered 87 specialist tools on every turn, and
+they are run deliberately from this CLI.
+
+It is an add-on, not a separate app: the tools are written against Chronoa's
+skill contract and use its shared library (`files`, `config`, `sysfs`,
+`sense_reading`, `egress`, `netprovision`, `skills.Skill`). Chronoa must be
+installed (`/usr/lib/shani-chronoa`) or checked out beside this repo. Consent
+keys (packet capture, driver build, network provisioning ...) stay in
+Chronoa's settings, so a grant already made still applies.
+
+The Python package keeps its import name `shani_sysadmin` for now: Chronoa's
+compatibility shims (`model_registry`, `cultivation`, `merge`, `adapter`,
+`run_command`, `backup_status`) import it by that name.
 
 ## Run it
 
-From a checkout:
-
 ```bash
-python3 -m shani_sysadmin list
+shani-chronoa-extras list                       # installed (alias: shani-sysadmin)
+python3 -m shani_sysadmin list                  # from a checkout
 python3 -m shani_sysadmin show capture_packets
 python3 -m shani_sysadmin run capture_packets '{"interface": "eth0", "count": 5}'
 python3 -m shani_sysadmin senses
 python3 -m shani_sysadmin check
 ```
 
-Packaged installs get a `shani-sysadmin` console script (see
-`pyproject.toml`).
+Where Chronoa is found: `$SHANI_CHRONOA_LIB` (its library), else a checkout at
+`$SHANI_CHRONOA_ROOT` or `../shani-chronoa`, else `/usr/lib/shani-chronoa`.
+
+## Tests
+
+The tests use Chronoa's test fixtures and schema, so they need a Chronoa
+checkout (`../shani-chronoa`, or `SHANI_CHRONOA_ROOT=/path/to/shani-chronoa`):
+
+```bash
+python3 -m pytest -q tests
+```
 
 ## What moved here
 
@@ -151,5 +172,5 @@ the implementation is only here, under `shani_sysadmin.ml_harness`.
 ## Tests
 
 ```bash
-PYTHONPATH=apps/shani-sysadmin python3 -m pytest apps/shani-sysadmin/tests -q
+python3 -m pytest -q tests
 ```

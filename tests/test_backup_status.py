@@ -38,7 +38,8 @@ import sys
 
 import pytest
 
-_REPO = pathlib.Path(__file__).resolve().parents[3]
+from shani_sysadmin.bootstrap import APP_ROOT, CHRONOA_ROOT  # noqa: E402
+_REPO = CHRONOA_ROOT
 sys.path.insert(0, str(_REPO / "usr" / "lib" / "shani-chronoa"))
 
 from shani_sysadmin.skills import backup_status as BS  # noqa: E402
@@ -206,7 +207,7 @@ def test_it_never_writes_to_the_repository(tmp_path, monkeypatch):
     verb list; a status reader that can reach one is a writer. Asserted on the
     source because the run-time list is not obviously the same thing.
     """
-    source = (_REPO / "apps/shani-sysadmin/shani_sysadmin/skills"
+    source = (APP_ROOT / "shani_sysadmin/skills"
               / "backup_status.py").read_text()
     code = "\n".join(line for line in source.splitlines()
                      if not line.lstrip().startswith("#"))
